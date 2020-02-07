@@ -1,0 +1,30 @@
+{
+  "name": "holla",
+  "version": "1.0.0",
+  "description": "chat app...",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://benneee:TUpgu9ytT2j2CWL@github.com/Benneee/holla.git"
+  },
+  "keywords": [
+    "chat",
+    "app",
+    "chat-app",
+    "sockets",
+    "sockets.io",
+    "nodejs"
+  ],
+  "author": "Benedict Nkeonye",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benneee/holla/issues"
+  },
+  "homepage": "https://github.com/Benneee/holla#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
