@@ -11,6 +11,9 @@ const locationBtn = document.querySelector("#send-location");
 
 const locationText = document.querySelector("#locationText");
 
+const latTag = document.querySelector(".latitude");
+const longTag = document.querySelector(".longitude");
+
 socket.on("newUser", welcomeText => {
   log(welcomeText);
   if (welcomeText) {
@@ -53,10 +56,10 @@ locationBtn.addEventListener("click", e => {
 });
 
 socket.on("location", location => {
-  // const listItem = document.createElement("li");
-  // const listTextContent = document.createTextNode(location);
-  // listItem.appendChild(listTextContent);
+  const latitude = JSON.parse(location.latitude);
+  const longitude = JSON.parse(location.longitude);
 
-  // locationText.appendChild(listItem);
+  latTag.textContent = latitude;
+  longTag.textContent = longitude;
   log(location);
 });
