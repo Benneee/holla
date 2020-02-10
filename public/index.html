@@ -64,6 +64,10 @@
         font-size: 0.8rem;
       }
 
+      .locText {
+        text-align: center;
+      }
+
       #chatMessageOutput li:nth-child(odd) {
         background-color: lightblue;
         padding: 1.5px;
@@ -76,7 +80,9 @@
 
       <ul id="chatMessageOutput"></ul>
 
-      <ul id="locationText"></ul>
+      <!-- <ul id="locationText"></ul> -->
+      <p class="locText">Latitude: <span class="latitude"> </span></p>
+      <p class="locText">Longitude: <span class="longitude"> </span></p>
 
       <form id="chatForm">
         <input
