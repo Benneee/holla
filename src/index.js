@@ -38,6 +38,10 @@ io.on("connection", socket => {
   socket.on("disconnect", () => {
     io.emit("newUser", "A user has left");
   });
+
+  socket.on("location", location => {
+    io.emit("location", location);
+  });
 });
 
 server.listen(port, () => {
