@@ -11,8 +11,7 @@ const locationBtn = document.querySelector("#send-location");
 
 const locationText = document.querySelector("#locationText");
 
-const latTag = document.querySelector(".latitude");
-const longTag = document.querySelector(".longitude");
+const locationTag = document.querySelector(".locationTag");
 
 socket.on("newUser", welcomeText => {
   log(welcomeText);
@@ -56,10 +55,7 @@ locationBtn.addEventListener("click", e => {
 });
 
 socket.on("location", location => {
-  const latitude = JSON.parse(location.latitude);
-  const longitude = JSON.parse(location.longitude);
-
-  latTag.textContent = latitude;
-  longTag.textContent = longitude;
+  // Let it show on the screen
+  locationTag.setAttribute("href", location);
   log(location);
 });
