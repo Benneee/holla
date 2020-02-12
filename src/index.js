@@ -40,7 +40,10 @@ io.on("connection", socket => {
   });
 
   socket.on("location", location => {
-    io.emit("location", location);
+    io.emit(
+      "location",
+      `https://google.com/maps?q=${location.latitude},${location.longitude}`
+    );
   });
 });
 
