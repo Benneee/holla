@@ -55,7 +55,6 @@ locationBtn.addEventListener("click", e => {
 });
 
 socket.on("location", location => {
-  // Let it show on the screen
   locationTag.setAttribute("href", location);
   log(location);
 });
