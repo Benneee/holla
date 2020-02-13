@@ -23,7 +23,13 @@ socket.on("newUser", welcomeText => {
 form.addEventListener("submit", e => {
   const chatMessage = e.target.elements.message.value;
   const chatInput = document.querySelector("#chatFormInput");
-  socket.emit("sendMessage", chatMessage);
+  socket.emit("sendMessage", chatMessage, error => {
+    if (error) {
+      // return alert(error);
+      return log(error);
+    }
+    log("Message delivered");
+  });
 
   chatInput.value = "";
 
@@ -48,7 +54,9 @@ locationBtn.addEventListener("click", e => {
     const { latitude, longitude } = position.coords;
     const location = { latitude, longitude };
 
-    socket.emit("location", location);
+    socket.emit("location", location, callback => {
+      log("location shared");
+    });
   });
 
   e.preventDefault();
