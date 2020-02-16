@@ -9,11 +9,11 @@ const chatInput = document.querySelector("#chatFormInput");
 
 const chatBtn = document.querySelector("#chatFormBtn");
 
-const output = document.querySelector("#chatMessageOutput");
+// const output = document.querySelector("#chatMessageOutput");
 
 const locationBtn = document.querySelector("#send-location");
 
-const locationText = document.querySelector(".locText");
+// const locationText = document.querySelector(".locText");
 
 const locationTag = document.querySelector(".locationTag");
 
@@ -42,11 +42,12 @@ form.addEventListener("submit", e => {
 });
 
 socket.on("sendMessage", chatMessage => {
-  const listItem = document.createElement("li");
-  const listTextContent = document.createTextNode(chatMessage);
-  listItem.appendChild(listTextContent);
+  // const listItem = document.createElement("li");
+  // const listTextContent = document.createTextNode(chatMessage);
+  // listItem.appendChild(listTextContent);
 
-  output.appendChild(listItem);
+  // output.appendChild(listItem);
+  log(chatMessage);
 });
 
 locationBtn.addEventListener("click", e => {
@@ -70,7 +71,7 @@ locationBtn.addEventListener("click", e => {
 
 socket.on("location", location => {
   locationBtn.removeAttribute("disabled");
-  locationText.style.display = "block";
-  locationTag.setAttribute("href", location);
+  // locationText.style.display = "block";
+  // locationTag.setAttribute("href", location);
   log(location);
 });
