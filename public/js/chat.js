@@ -5,11 +5,15 @@ const tag = document.querySelector("#welcomeTag");
 
 const form = document.querySelector("#chatForm");
 
+const chatInput = document.querySelector("#chatFormInput");
+
+const chatBtn = document.querySelector("#chatFormBtn");
+
 const output = document.querySelector("#chatMessageOutput");
 
 const locationBtn = document.querySelector("#send-location");
 
-const locationText = document.querySelector("#locationText");
+const locationText = document.querySelector(".locText");
 
 const locationTag = document.querySelector(".locationTag");
 
@@ -21,18 +25,19 @@ socket.on("newUser", welcomeText => {
 });
 
 form.addEventListener("submit", e => {
+  // Disable form and submit btn
+  chatBtn.setAttribute("disabled", "disabled");
   const chatMessage = e.target.elements.message.value;
-  const chatInput = document.querySelector("#chatFormInput");
   socket.emit("sendMessage", chatMessage, error => {
+    chatBtn.removeAttribute("disabled");
+    chatInput.value = "";
+    chatInput.focus();
     if (error) {
       // return alert(error);
       return log(error);
     }
     log("Message delivered");
   });
-
-  chatInput.value = "";
-
   e.preventDefault();
 });
 
@@ -45,11 +50,12 @@ socket.on("sendMessage", chatMessage => {
 });
 
 locationBtn.addEventListener("click", e => {
-  //   log("clicked");
+  // log("clicked");
   if (!navigator.geolocation) {
     return alert("Geolocation is not supported by your browser.");
   }
   // Doesn't support the promise API at the moment, so we use  callbacks
+  locationBtn.setAttribute("disabled", "disabled");
   navigator.geolocation.getCurrentPosition(position => {
     const { latitude, longitude } = position.coords;
     const location = { latitude, longitude };
@@ -63,6 +69,8 @@ locationBtn.addEventListener("click", e => {
 });
 
 socket.on("location", location => {
+  locationBtn.removeAttribute("disabled");
+  locationText.style.display = "block";
   locationTag.setAttribute("href", location);
   log(location);
 });

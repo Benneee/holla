@@ -20,7 +20,7 @@
 
       #chatForm {
         background: #000;
-        padding: 1px;
+        /* padding: 1px; */
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -29,21 +29,22 @@
 
       #chatFormInput {
         border: 0;
-        padding: 2px;
-        width: 85vw;
-        margin-right: 2%;
+        padding: 2px 1px;
+        width: 75vw;
+        margin-right: 1px;
       }
 
       #chatFormBtn {
         background-color: aqua;
-        padding: 1.5px 2px;
-        width: auto;
+        padding: 1.5px 1px;
+        width: 9vw;
+        margin-right: 1px;
       }
 
       #send-location {
         background-color: greenyellow;
-        padding: 1.5px 2px;
-        width: auto;
+        padding: 1.5px 1px;
+        width: 14vw;
         position: fixed;
         bottom: 0;
         right: 0;
@@ -66,6 +67,7 @@
 
       .locText {
         text-align: center;
+        display: none;
       }
 
       #chatMessageOutput li:nth-child(odd) {
@@ -91,11 +93,11 @@
           placeholder="Enter message..."
           id="chatFormInput"
         />
-        <button id="chatFormBtn">Send</button>
+        <button id="chatFormBtn">Chat</button>
       </form>
 
       <div class="location-btn">
-        <button id="send-location">Send Location</button>
+        <button id="send-location">Location</button>
       </div>
     </div>
 
