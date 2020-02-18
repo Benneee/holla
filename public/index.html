@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Holla</title>
+    <style>
+      #location-text {
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -12,6 +17,8 @@
 
       <!-- <p class="locText">Location: <a class="locationTag">my location</a></p> -->
       <div id="messages"></div>
+      <div id="location-text"></div>
+
       <form id="chatForm">
         <input
           type="text"
@@ -31,6 +38,12 @@
     <script id="message-template" type="text/html">
       <div>
         <p>{{message}}</p>
+      </div>
+    </script>
+
+    <script id="location-template" type="text/html">
+      <div>
+        <p><a target="_blank" href={{location}}>My current location</a></p>
       </div>
     </script>
 
