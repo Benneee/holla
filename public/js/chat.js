@@ -18,7 +18,8 @@ const locationTemplate = document.querySelector("#location-template").innerHTML;
 socket.on("newUser", welcomeText => {
   log(welcomeText);
   if (welcomeText) {
-    tag.textContent = welcomeText;
+    const text = welcomeText.text;
+    tag.textContent = text;
   }
 });
 
@@ -42,7 +43,8 @@ form.addEventListener("submit", e => {
 socket.on("sendMessage", message => {
   log(message);
   const html = Mustache.render(messageTemplate, {
-    message
+    message: message.text,
+    createdAt: moment(message.createdAt).format("h:mm a")
   });
   messages.insertAdjacentHTML("beforeend", html);
 });
