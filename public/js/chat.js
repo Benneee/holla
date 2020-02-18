@@ -6,13 +6,14 @@ const tag = document.querySelector("#welcomeTag");
 const form = document.querySelector("#chatForm");
 const chatInput = document.querySelector("#chatFormInput");
 const chatBtn = document.querySelector("#chatFormBtn");
-const locationBtn = document.querySelector("#send-location");
-const locationTag = document.querySelector(".locationTag");
 
 const messages = document.querySelector("#messages");
+const locationText = document.querySelector("#location-text");
+const locationBtn = document.querySelector("#send-location");
 
 // TEMPLATES
 const messageTemplate = document.querySelector("#message-template").innerHTML;
+const locationTemplate = document.querySelector("#location-template").innerHTML;
 
 socket.on("newUser", welcomeText => {
   log(welcomeText);
@@ -67,7 +68,7 @@ locationBtn.addEventListener("click", e => {
 
 socket.on("location", location => {
   locationBtn.removeAttribute("disabled");
-  // locationText.style.display = "block";
-  // locationTag.setAttribute("href", location);
+  const url = Mustache.render(locationTemplate, { location });
+  locationText.insertAdjacentHTML("beforeend", url);
   log(location);
 });
