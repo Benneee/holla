@@ -70,7 +70,11 @@ locationBtn.addEventListener("click", e => {
 
 socket.on("location", location => {
   locationBtn.removeAttribute("disabled");
-  const url = Mustache.render(locationTemplate, { location });
-  locationText.insertAdjacentHTML("beforeend", url);
+  const { url, createdAt } = location;
+  const html = Mustache.render(locationTemplate, {
+    url,
+    createdAt: moment(createdAt).format("h:mm a")
+  });
+  locationText.insertAdjacentHTML("beforeend", html);
   log(location);
 });
