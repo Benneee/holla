@@ -4,46 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/styles.min.css" />
     <title>Holla</title>
-    <style>
-      #location-text {
-        cursor: pointer;
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <h3 id="welcomeTag"></h3>
+    <div class="chat">
+      <div class="chat__sidebar"></div>
+      <div class="chat__main">
+        <h3 id="welcomeTag"></h3>
 
-      <!-- <p class="locText">Location: <a class="locationTag">my location</a></p> -->
-      <div id="messages"></div>
-      <div id="location-text"></div>
+        <div id="messages" class="chat__messages"></div>
 
-      <form id="chatForm">
-        <input
-          type="text"
-          autocomplete="off"
-          name="message"
-          placeholder="Enter message..."
-          id="chatFormInput"
-        />
-        <button id="chatFormBtn">Chat</button>
-      </form>
+        <!-- <div id="location-text" class="chat__messages"></div> -->
 
-      <div class="location-btn">
-        <button id="send-location">Location</button>
+        <div class="compose">
+          <form id="chatForm">
+            <input
+              type="text"
+              autocomplete="off"
+              name="message"
+              placeholder="Enter message..."
+              id="chatFormInput"
+            />
+            <button id="chatFormBtn">Send</button>
+          </form>
+
+          <button id="send-location">Send Location</button>
+        </div>
       </div>
     </div>
 
     <script id="message-template" type="text/html">
-      <div>
-        <p>{{createdAt}} - {{message}}</p>
+      <div class="message">
+        <p>
+          <span class="message__name">Username</span>
+          <span class="message__meta">{{createdAt}}</span>
+        </p>
+        <p>{{message}}</p>
       </div>
     </script>
 
     <script id="location-template" type="text/html">
-      <div>
-        <p>{{createdAt}} <a target="_blank" href={{url}}>- My current location</a></p>
+      <div class="message">
+        <p>
+          <span class="message__name">Username</span>
+          <span class="message__meta">{{createdAt}}</span>
+        </p>
+        <p><a target="_blank" href={{url}}>My current location</a></p>
       </div>
     </script>
 
