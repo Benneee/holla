@@ -8,7 +8,7 @@ const chatInput = document.querySelector("#chatFormInput");
 const chatBtn = document.querySelector("#chatFormBtn");
 
 const messages = document.querySelector("#messages");
-const locationText = document.querySelector("#location-text");
+// const locationText = document.querySelector("#location-text");
 const locationBtn = document.querySelector("#send-location");
 
 // TEMPLATES
@@ -75,6 +75,6 @@ socket.on("location", location => {
     url,
     createdAt: moment(createdAt).format("h:mm a")
   });
-  locationText.insertAdjacentHTML("beforeend", html);
+  messages.insertAdjacentHTML("beforeend", html);
   log(location);
 });
