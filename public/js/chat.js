@@ -14,12 +14,22 @@ const locationBtn = document.querySelector("#send-location");
 // TEMPLATES
 const messageTemplate = document.querySelector("#message-template").innerHTML;
 const locationTemplate = document.querySelector("#location-template").innerHTML;
+const welcomeTemplate = document.querySelector("#welcome-template").innerHTML;
 
-socket.on("newUser", welcomeText => {
+// OPTIONS
+const { username, room } = Qs.parse(location.search, {
+  ignoreQueryPrefix: true
+});
+
+socket.on("welcomeMsg", welcomeText => {
   log(welcomeText);
   if (welcomeText) {
-    const text = welcomeText.text;
-    tag.textContent = text;
+    const text = Mustache.render(messageTemplate, {
+      message: welcomeText.text,
+      createdAt: moment(welcomeText.createdAt).format("h:mm a")
+    });
+    // tag.textContent = text;
+    messages.insertAdjacentHTML("beforeend", text);
   }
 });
 
@@ -78,3 +88,5 @@ socket.on("location", location => {
   messages.insertAdjacentHTML("beforeend", html);
   log(location);
 });
+
+socket.emit("join", { username, room });

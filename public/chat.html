@@ -12,7 +12,7 @@
     <div class="chat">
       <div class="chat__sidebar"></div>
       <div class="chat__main">
-        <h3 id="welcomeTag"></h3>
+        <!-- <h3 id="welcomeTag"></h3> -->
 
         <div id="messages" class="chat__messages"></div>
 
@@ -52,6 +52,16 @@
           <span class="message__meta">{{createdAt}}</span>
         </p>
         <p><a target="_blank" href={{url}}>My current location</a></p>
+      </div>
+    </script>
+
+    <script id="welcome-template" type="text/html">
+      <div class="message">
+        <p>
+          <span class="message__name">Username</span>
+          <span class="message__meta">{{createdAt}}</span>
+        </p>
+        <p>{{message}}</p>
       </div>
     </script>
 
