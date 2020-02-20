@@ -32,9 +32,14 @@ io.on("connection", socket => {
 
   // socket.emit("newUser", "Welcome to 'Holla!'"); // send to single user
 
-  socket.emit("newUser", generateMessage("Welcome to 'Holla!"));
-
-  socket.broadcast.emit("newUser", generateMessage("A new user has joined!")); // send to everyone except the author
+  socket.on("join", ({ username, room }) => {
+    // This method can only be used on the server
+    socket.join(room);
+    socket.emit("welcomeMsg", generateMessage("Welcome to 'Holla!"));
+    socket.broadcast
+      .to(room)
+      .emit("welcomeMsg", generateMessage(`${username} has joined!`)); // send to everyone except the author
+  });
 
   socket.on("sendMessage", (chatMessage, callback) => {
     const filter = new Filter();
@@ -42,7 +47,7 @@ io.on("connection", socket => {
       return callback("Profanity is not allowed!");
     }
 
-    io.emit("sendMessage", generateMessage(chatMessage)); // send to the network
+    io.to("lagos").emit("sendMessage", generateMessage(chatMessage)); // send to the network
     callback();
   });
 
