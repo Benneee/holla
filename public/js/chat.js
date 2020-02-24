@@ -25,6 +25,7 @@ socket.on("welcomeMsg", welcomeText => {
   log(welcomeText);
   if (welcomeText) {
     const text = Mustache.render(messageTemplate, {
+      username: welcomeText.username,
       message: welcomeText.text,
       createdAt: moment(welcomeText.createdAt).format("h:mm a")
     });
@@ -51,10 +52,11 @@ form.addEventListener("submit", e => {
 });
 
 socket.on("sendMessage", message => {
-  log(message);
+  const { username, text, createdAt } = message;
   const html = Mustache.render(messageTemplate, {
-    message: message.text,
-    createdAt: moment(message.createdAt).format("h:mm a")
+    username,
+    message: text,
+    createdAt: moment(createdAt).format("h:mm a")
   });
   messages.insertAdjacentHTML("beforeend", html);
 });
@@ -80,8 +82,9 @@ locationBtn.addEventListener("click", e => {
 
 socket.on("location", location => {
   locationBtn.removeAttribute("disabled");
-  const { url, createdAt } = location;
+  const { username, url, createdAt } = location;
   const html = Mustache.render(locationTemplate, {
+    username,
     url,
     createdAt: moment(createdAt).format("h:mm a")
   });
