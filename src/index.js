@@ -7,6 +7,12 @@ const {
   generateMessage,
   generateLocationMessage
 } = require("./utils/messages");
+const {
+  addUser,
+  removeUser,
+  getUser,
+  getUsersInRoom
+} = require("./utils/users");
 
 const app = express();
 const server = http.createServer(app);
@@ -32,13 +38,21 @@ io.on("connection", socket => {
 
   // socket.emit("newUser", "Welcome to 'Holla!'"); // send to single user
 
-  socket.on("join", ({ username, room }) => {
+  socket.on("join", ({ username, room }, callback) => {
+    const { error, user } = addUser({ id: socket.id, username, room });
+
+    if (error) {
+      return callback(error);
+    }
+
     // This method can only be used on the server
-    socket.join(room);
+    socket.join(user.room);
     socket.emit("welcomeMsg", generateMessage("Welcome to 'Holla!"));
     socket.broadcast
-      .to(room)
-      .emit("welcomeMsg", generateMessage(`${username} has joined!`)); // send to everyone except the author
+      .to(user.room)
+      .emit("welcomeMsg", generateMessage(`${user.username} has joined!`)); // send to everyone except the author
+
+    callback();
   });
 
   socket.on("sendMessage", (chatMessage, callback) => {
@@ -52,7 +66,13 @@ io.on("connection", socket => {
   });
 
   socket.on("disconnect", () => {
-    io.emit("newUser", generateMessage("A user has left"));
+    const user = removeUser(socket.id);
+    if (user) {
+      io.to(user.room).emit(
+        "welcomeMsg",
+        generateMessage(`${user.username} has left!`)
+      );
+    }
   });
 
   socket.on("location", (location, callback) => {
