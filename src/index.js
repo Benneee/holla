@@ -55,6 +55,12 @@ io.on("connection", socket => {
         generateMessage("Admin", `${user.username} has joined!`)
       ); // send to everyone except the author
 
+    // For Sidebar
+    io.to(user.room).emit("roomData", {
+      room: user.room,
+      users: getUsersInRoom(user.room)
+    });
+
     callback();
   });
 
@@ -80,6 +86,10 @@ io.on("connection", socket => {
         "welcomeMsg",
         generateMessage("Admin", `${user.username} has left!`)
       );
+      io.to(user.room).emit("roomData", {
+        room: user.room,
+        users: getUsersInRoom(user.room)
+      });
     }
   });
 
